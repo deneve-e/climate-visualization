@@ -11,7 +11,14 @@ def index():
 
 @app.route('/data', methods=['POST'])
 def get_data():
+    # Ensure the file is received from the request
+    if 'file' not in request.files:
+        return 'No file part in the request', 400
+
     file = request.files['file']
+    if file.filename == '':
+        return 'No selected file', 400
+
     file_path = f'data/{file.filename}'
     file.save(file_path)
 
