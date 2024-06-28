@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-def visualize_temperature_data(df):
+def visualize_temperature_data(df, output_path='static/plot.png'):
     plt.figure(figsize=(12, 6))
     sns.lineplot(data=df, x='YEAR', y='TAVG', label="Average Temperature")
     sns.lineplot(data=df, x='YEAR', y='TMAX', label='Maximum Temperature')
@@ -10,6 +10,5 @@ def visualize_temperature_data(df):
     plt.xlabel('Year')
     plt.ylabel('Temperature (°C)')
     plt.legend()
-    plt.snow()
-
-visualize_temperature_data(annual_data)
+    plt.savefig(output_path)
+    plt.close()
