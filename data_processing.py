@@ -14,3 +14,5 @@ def load_and_process_data(file_path):
 
     # Inspect the first few rows
     # print(df.head())
+
+    return annual_data
