@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Climate Change Visualization</title>
 </head>
+
 <body>
     <h1>Climate Change Visualization</h1>
-    <form action="/data" method="post" enctype="multipart/form-data">
-        <label for="file"> Upload CSV File:</label>
-        <input type="file" id="file" name="file" required>
+    <form action="/data">
+        <label for="location">Enter Location:</label><br>
+        <input type="text" id="location" name="location" value="Japan">
+        <br><br>
+        <label for="start">Start date:</label>
+        <input type="date" id="start" name="startDate" value="1931-01-01" min="1931-01-01" max="2023-12-31" /><br>
+        <label for="end">End date:</label>
+        <input type="date" id="end" name="endDate" value="1935-01-01" min="1931-01-01" max="2023-12-31" />
         <br><br>
         <input type="submit" value="Submit">
     </form>
 </body>
+
 </html>

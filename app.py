@@ -9,23 +9,14 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/data', methods=['POST'])
+@app.route('/data/', methods=['GET'])
 def get_data():
-    # Ensure the file is received from the request
-    if 'file' not in request.files:
-        return 'No file part in the request', 400
+    location = request.args.get('location')
+    startDate = request.args.get('startDate')
+    endDate = request.args.get('endDate')
+    print(location, startDate, endDate)
 
-    file = request.files['file']
-    if file.filename == '':
-        return 'No selected file', 400
-
-    file_path = f'data/{file.filename}'
-    file.save(file_path)
-
-    data = load_and_process_data(file_path)
-    visualize_temperature_data(data)
-
-    return render_template('data.html')
+    return f"{location}, from {startDate} to {endDate}"
 
 if __name__ == '__main__':
     app.run(debug=True)
