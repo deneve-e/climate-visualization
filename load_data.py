@@ -11,8 +11,8 @@ def load_csv_to_db(csv_file):
             data = ClimateData(
                 station=row['STATION'],
                 date=row['DATE'],
-                latitude=row['LATITUTDE'],
-                longtitude=row['LONGTITUDE'],
+                latitude=row['LATITUDE'],
+                longitude=row['LONGITUDE'],
                 elevation=row['ELEVATION'],
                 name=row['NAME'],
                 tmax=row['TMAX'],

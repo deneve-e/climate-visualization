@@ -1,11 +1,11 @@
 from app import db
 
-class ClimateData(db.model):
-    id = db.Column(db.Integer, primary_key=true)
+class ClimateData(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
     station = db.Column(db.String(20))
     date = db.Column(db.String(10))
     latitude = db.Column(db.Float)
-    longtitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)
     elevation = db.Column(db.Float)
     name = db.Column(db.String(50))
     tmax = db.Column(db.Float)
@@ -16,7 +16,7 @@ class ClimateData(db.model):
             'station': self.station,
             'date': self.date,
             'latitude': self.latitude,
-            'longtitude': self.longtitude,
+            'longitude': self.longitude,
             'elevation': self.elevation,
             'name': self.name,
             'tmax': self.tmax,
