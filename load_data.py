@@ -1,12 +1,12 @@
 import pandas as pd
-from app import db, app
-from models import ClimateData
+from app import create_app, db
+from app.models import ClimateData
 
 def load_csv_to_db(csv_file):
     df = pd.read_csv(csv_file)
 
+    app = create_app()
     with app.app_context():
-        db.create_all()
         for index, row in df.iterrows():
             data = ClimateData(
                 station=row['STATION'],
