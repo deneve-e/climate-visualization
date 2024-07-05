@@ -10,4 +10,5 @@ def index():
 @main.route('/data', methods=['GET'])
 def get_data():
     data = ClimateData.query.all()
-    return jsonify([d.to_dict() for d in data])
+    # return jsonify([d.to_dict() for d in data])
+    return render_template('data.html', data=data)

@@ -1,13 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Climate Change Visualization</title>
 </head>
+
 <body>
-    <h1>Climate Change Visualization</h1>
-    <img src="/static/plot.png" alt="Climate Change Plot">
     <a href="/">Go Back</a>
+    <section>
+        <h2>Climate Change Visualization</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th width="100px">Station</th>
+                    <th width="100px">Latitude</th>
+                    <th width="100px">Longitude</th>
+                    <th width="100px">Elevation</th>
+                    <th width="100px">Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <td align="center">{{data[0].station}}</td>
+                <td align="center">{{data[0].latitude}}</td>
+                <td align="center">{{data[0].longitude}}</td>
+                <td align="center">{{data[0].elevation}}</td>
+                <td align="center">{{data[0].name}}</td>
+            </tbody>
+        </table>
+        <table>
+            <thead>
+                <tr>
+                    <th width="100px">Date</th>
+                    <th width="100px">Tmin</th>
+                    <th width="100px">Tmax</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in data %}
+                <tr>
+                    <td align="center">{{data.date}}</td>
+                    <td align="center">{{data.tmin}}</td>
+                    <td align="center">{{data.tmax}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
 </body>
+
 </html>
