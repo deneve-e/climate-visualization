@@ -1,14 +1,14 @@
 from flask import Flask 
 from flask_sqlalchemy import SQLAlchemy
-from config import Config
+from flask_migrate import Migrate
 
-db = SQLAlchemy()
+from config import Config
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
-
-    db.init_app(app)
+    db = SQLAlchemy(app)
+    migrate = Migrate(app, db)
 
     with app.app_context():
         from .models import ClimateData # Import here to avoid circular import
