@@ -16,6 +16,7 @@ class Station(db.Model):
     longitude = db.Column(db.Float)
     elevation = db.Column(db.Float)
     name = db.Column(db.String(50))
+    temperature_records = db.relationship('TemperatureRecord', backref='station', lazy=True)
 
 class TemperatureRecord(db.Model):
     id = db.Column(db.Integer, primary_key=True)

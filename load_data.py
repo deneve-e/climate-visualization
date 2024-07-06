@@ -8,13 +8,10 @@ def populate_database_from_csv(csv_file):
             with open(csv_file, 'r', newline='') as file:
                 reader = csv.DictReader(file)
             
-                for row in reader:
-                    station_code = row['STATION']
-                    existing_station = Station.query.filter_by(station_code=station_code).first()
-                    if existing_station:
-                        print(f"Station with code {station_code} already exists. Skipping...")
-                        continue
-
+                first_row = next(reader)
+                station_code = first_row['STATION']
+                existing_station = Station.query.filter_by(station_code=station_code).first()
+                if not existing_station:
                     # Add station if not already added
                     station = Station(
                         station_code=station_code,
@@ -27,9 +24,14 @@ def populate_database_from_csv(csv_file):
                     db.session.commit() # Commit here to ensure station IDs are available
                     station_id = station.id
                     print(f"Added station: {station_code}, ID: {station_id}")
-                                
-# TODO: finish adding temperature records
-                    # Add temperature record
+                else:
+                    station_id = existing_station.id
+                    print(f"Station with code {station_code} already exists. Using existing ID: {station_id}")
+                     
+                # Reset file pointer to re-read rows for temperature records
+                file.seek(0)
+                reader = csv.DictReader(file)       
+                for row in reader:
                     date_str = row['DATE']
                     try:
                         date = datetime.strptime(date_str, '%Y-%m')
