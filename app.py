@@ -17,7 +17,7 @@ class Station(db.Model):
     elevation = db.Column(db.Float)
     name = db.Column(db.String(50))
 
-class TemperaturRecord(db.Model):
+class TemperatureRecord(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     station_id = db.Column(db.Integer, db.ForeignKey('station.id'), nullable=False)
     date = db.Column(db.Date, nullable=False)
@@ -30,8 +30,7 @@ def index():
 
 @app.route('/data', methods=['GET'])
 def get_data():
-    data = TemperaturRecord.query.all()
-    # return jsonify([d.to_dict() for d in data])
+    data = TemperatureRecord.query.all()
     return render_template('data.html', data=data)
 
 if __name__ == '__main__':
