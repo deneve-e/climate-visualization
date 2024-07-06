@@ -15,10 +15,10 @@ def populate_database_from_csv(csv_file):
                     # Add station if not already added
                     station = Station(
                         station_code=station_code,
-                        latitude=float(row['LATITUDE']),
-                        longitude=float(row['LONGITUDE']),
-                        elevation=float(row['ELEVATION']),
-                        name=row['NAME']
+                        latitude=float(first_row['LATITUDE']),
+                        longitude=float(first_row['LONGITUDE']),
+                        elevation=float(first_row['ELEVATION']),
+                        name=first_row['NAME']
                     )
                     db.session.add(station)
                     db.session.commit() # Commit here to ensure station IDs are available
@@ -30,7 +30,10 @@ def populate_database_from_csv(csv_file):
                      
                 # Reset file pointer to re-read rows for temperature records
                 file.seek(0)
-                reader = csv.DictReader(file)       
+                reader = csv.DictReader(file)  
+                
+                temperature_records = []
+                     
                 for row in reader:
                     date_str = row['DATE']
                     try:
@@ -49,11 +52,17 @@ def populate_database_from_csv(csv_file):
                         tmin=tmin
                     )
                     
-                    db.session.add(temperature_record)
-                    db.session.commit()
-                    print(f"Added temperature record: {date}, Tmax: {tmax}, Tmin: {tmin}")
+                temperature_records.append(temperature_record)
+                db.session.add_all(temperature_records)
+                db.session.commit()
+                print(f"Added temperature record: {date}, Tmax: {tmax}, Tmin: {tmin}")
+
         except Exception as ex:
             print(f"Error processing CSV file: {ex}")    
 
 if __name__ == '__main__':
-    populate_database_from_csv('data/JA000047662.csv')
+    filesList = ['data/HR000142360.csv', 'data/JA000047662.csv', 'data/JA000047759.csv', 'data/JA000047765.csv', 'data/JAW00043302.csv', 'data/JAW00043323.csv', 'data/UPM00033345.csv', 'data/UPM00033837.csv']
+    
+    
+    for f in filesList:
+            populate_database_from_csv(f), 
