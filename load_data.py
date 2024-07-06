@@ -30,7 +30,7 @@ def populate_database_from_csv(csv_file):
                      
                 # Reset file pointer to re-read rows for temperature records
                 file.seek(0)
-                reader = csv.DictReader(file)  
+                reader = csv.DictReader(file)
                 
                 temperature_records = []
                      
@@ -52,10 +52,11 @@ def populate_database_from_csv(csv_file):
                         tmin=tmin
                     )
                     
-                temperature_records.append(temperature_record)
+                    temperature_records.append(temperature_record)
+                    print(f"Added temperature record: {date}, Tmax: {tmax}, Tmin: {tmin}")
+
                 db.session.add_all(temperature_records)
                 db.session.commit()
-                print(f"Added temperature record: {date}, Tmax: {tmax}, Tmin: {tmin}")
 
         except Exception as ex:
             print(f"Error processing CSV file: {ex}")    

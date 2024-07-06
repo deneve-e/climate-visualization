@@ -36,8 +36,19 @@ def index():
 
 @app.route('/data', methods=['GET'])
 def get_data():
-    data = TemperatureRecord.query.all()
-    return render_template('data.html', data=data)
+    stations = Station.query.all()
+    temperature_records = TemperatureRecord.query.all()
+    return render_template('data.html', stations=stations, temperature_records=temperature_records)
+
+# Ensure to remove or secure these routes in a production environment to prevent accidental data loss.
+@app.route('/clean_tables')
+def clean_tables():
+    meta = db.metadata
+    for table in reversed(meta.sorted_tables):
+        print(f'Clearing table {table}')
+        db.session.execute(table.delete())
+    db.session.commit()
+    return "Cleaned all data from all tables"
 
 if __name__ == '__main__':
     app.run(debug=True)

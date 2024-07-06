@@ -14,35 +14,43 @@
         <table>
             <thead>
                 <tr>
-                    <th width="100px">Station</th>
-                    <th width="100px">Latitude</th>
-                    <th width="100px">Longitude</th>
-                    <th width="100px">Elevation</th>
-                    <th width="100px">Name</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Elevation</th>
+                    <th>Station</th>
                 </tr>
             </thead>
             <tbody>
-                <td align="center">{{data[0].station}}</td>
-                <td align="center">{{data[0].latitude}}</td>
-                <td align="center">{{data[0].longitude}}</td>
-                <td align="center">{{data[0].elevation}}</td>
-                <td align="center">{{data[0].name}}</td>
+                {% for station in stations %}
+                <tr>
+                    <td align="center">{{station.id}}</td>
+                    <td align="center">{{station.name}}</td>
+                    <td align="center">{{station.latitude}}</td>
+                    <td align="center">{{station.longitude}}</td>
+                    <td align="center">{{station.elevation}}</td>
+                    <td align="center">{{station.station_code}}</td>
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
         <table>
             <thead>
                 <tr>
-                    <th width="100px">Date</th>
-                    <th width="100px">Tmin</th>
-                    <th width="100px">Tmax</th>
+                    <th>Station ID</th>
+                    <th>Date</th>
+                    <th>Tmin</th>
+                    <th>Tmax</th>
                 </tr>
             </thead>
             <tbody>
-                {% for data in data %}
+                {% for temperature_record in temperature_records %}
                 <tr>
-                    <td align="center">{{data.date}}</td>
-                    <td align="center">{{data.tmin}}</td>
-                    <td align="center">{{data.tmax}}</td>
+                    <td align="center">{{temperature_record.station_id}}</td>
+                    <td align="center">{{temperature_record.date}}</td>
+                    <td align="center">{{temperature_record.tmin}}</td>
+                    <td align="center">{{temperature_record.tmax}}</td>
                 </tr>
                 {% endfor %}
             </tbody>
