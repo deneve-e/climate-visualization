@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, jsonify
 from app import db
 from app.models import Station, TemperatureRecord
 from populate_database import populate_database_from_csv
+from http_service import HttpService
 
 bp = Blueprint('main', __name__)
 
@@ -9,8 +10,25 @@ bp = Blueprint('main', __name__)
 def index():
     return render_template('index.html')
 
-@bp.route('/data', methods=['GET'])
+@bp.route('/api/data', methods=['GET'])
 def get_data():
+        location = request.args.get('location')
+        start_date = request.args.get('start_date')
+        end_date = request.args.get('end_date')
+        # Filter and retrieve data based on the parameters
+        data = HttpService.fetch_data(location, start_date, end_date)
+        
+        return jsonify(data)
+    
+@bp.route('/api/stations', methods=['GET'])
+def get_stations():
+    stations = Station.query.all()
+    stations_dict = [station.to_dict() for station in stations]
+    print(stations_dict)
+    return jsonify(stations_dict)
+
+@bp.route('/data', methods=['GET'])
+def check_data():
     stations = Station.query.all()
     temperature_records = TemperatureRecord.query.all()
     return render_template('data.html', stations=stations, temperature_records=temperature_records)
