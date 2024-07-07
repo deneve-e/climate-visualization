@@ -1,9 +1,9 @@
 import csv
 from datetime import datetime
-from app import app, db, Station, TemperatureRecord
+from app import db
+from app.models import Station, TemperatureRecord
 
 def populate_database_from_csv(csv_file):
-    with app.app_context():
         try:
             with open(csv_file, 'r', newline='') as file:
                 reader = csv.DictReader(file)
@@ -60,10 +60,3 @@ def populate_database_from_csv(csv_file):
 
         except Exception as ex:
             print(f"Error processing CSV file: {ex}")    
-
-if __name__ == '__main__':
-    filesList = ['data/HR000142360.csv', 'data/JA000047662.csv', 'data/JA000047759.csv', 'data/JA000047765.csv', 'data/JAW00043302.csv', 'data/JAW00043323.csv', 'data/UPM00033345.csv', 'data/UPM00033837.csv']
-    
-    
-    for f in filesList:
-            populate_database_from_csv(f), 
