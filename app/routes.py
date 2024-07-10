@@ -10,13 +10,9 @@ bp = Blueprint('main', __name__)
 def index():
     return render_template('index.html')
 
-@bp.route('/api/data', methods=['GET'])
-def get_data():
-        location = request.args.get('location')
-        start_date = request.args.get('start_date')
-        end_date = request.args.get('end_date')
-        # Filter and retrieve data based on the parameters
-        data = HttpService.fetch_data(location, start_date, end_date)
+@bp.route('/api/stations/<int:station_id>', methods=['GET'])
+def get_temperature_records_by_station_id(station_id):
+        data = HttpService.fetch_data(station_id)
         
         return jsonify(data)
     
