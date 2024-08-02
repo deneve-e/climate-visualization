@@ -1,10 +1,63 @@
+# Virtual environment
 .venv/
+venv/
+
+# Python cache files
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
 
+# Environment variables
 .env
-*.db
 
-static/
+# Database files
+*.db
+*.sqlite
+
+# Static files (if collected separately)
+/static/
+
+# Log files
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Pytest
+.pytest_cache/

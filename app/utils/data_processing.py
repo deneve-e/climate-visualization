@@ -13,6 +13,6 @@ def load_and_process_data(file_path):
     annual_data = df.groupby('YEAR').agg({'TAVG': 'mean', 'TMAX': 'mean', 'TMIN': 'mean'}).reset_index()
 
     # Inspect the first few rows
-    # print(df.head())
+    print(df.head())
 
     return annual_data
