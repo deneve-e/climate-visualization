@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, request, jsonify
 from app import db
 from app.models import Station, TemperatureRecord
-from populate_database import populate_database_from_csv
-from http_service import HttpService
+from app.utils.populate_database import populate_database_from_csv
+from app.services.http_service import HttpService
 
 bp = Blueprint('main', __name__)
 
